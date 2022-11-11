@@ -1,0 +1,1 @@
+const orgName*: string = "EliiasG"

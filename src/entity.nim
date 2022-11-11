@@ -20,6 +20,11 @@ proc hasComponent*(entity: Entity, component: Component): bool =
             return true
     return false
 
+proc getComponent*[T](entity: Entity): T =
+    for c in entity.componentSeq:
+        if c is T:
+            return c
+
 proc addComponent*(entity: Entity, component: Component) = 
     if not entity.hasComponent(component):
         entity.componentSeq.add(component)
