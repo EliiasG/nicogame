@@ -8,14 +8,23 @@ proc newVector*(x, y: float): Vector =
     result.x = x
     result.y = y
 
+proc newVector*(v: float): Vector =
+    newVector(v, v)
+
 proc `$`*(vec: Vector): string =
     result = $vec.x & ", " & $vec.y
 
 proc `+`*(vec0, vec1: Vector): Vector =
     newVector(vec0.x + vec1.x, vec0.y + vec1.y)
 
+proc `+`*(vec0: Vector, v: float): Vector =
+    newVector(vec0.x + v, vec0.y + v)
+
 proc `-`*(vec0, vec1: Vector): Vector =
     newVector(vec0.x - vec1.x, vec0.y - vec1.y)
+
+proc `-`*(vec0: Vector, v: float): Vector =
+    newVector(vec0.x - v, vec0.y - v)
 
 proc `+=`*(vec0: var Vector, vec1: Vector) =
     vec0 = vec0 + vec1
@@ -27,7 +36,7 @@ proc `*`*(vec0: Vector, vec1: Vector): Vector =
     newVector(vec0.x * vec1.x, vec0.y * vec1.y)
 
 proc `*`*(vec0: Vector, v: float): Vector =
-    newVector(vec0.x * v, vec0.y * v) # not using the vec * vec proc, as there is no reason to allocate another vector
+    newVector(vec0.x * v, vec0.y * v)
 
 proc lenSq*(vec: Vector): float =
     vec.x.pow(2) + vec.y.pow(2)
